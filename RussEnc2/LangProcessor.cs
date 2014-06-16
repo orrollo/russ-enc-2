@@ -70,10 +70,11 @@ namespace RussEnc2
 
 		protected void AddEncCandidate(string lang, string encName)
 		{
-			if (ParseEncoding(encName) != null)
+			var encoding = ParseEncoding(encName);
+			if (encoding != null)
 			{
-				if (!LangEncs.ContainsKey(lang)) LangEncs.Add(lang, new List<string>());
-				LangEncs[lang].Add(encName);
+				if (!LangEncs.ContainsKey(lang)) LangEncs.Add(lang, new List<int>());
+				LangEncs[lang].Add(encoding.CodePage);
 			}
 		}
 	}

@@ -22,6 +22,25 @@ namespace RussEnc2
 				}
 				Console.WriteLine("done.");
 			}
+			// generate source file
+			var sb = new StringBuilder();
+			var chk = new StringBuilder();
+			chk.AppendLine("public static int check(byte[] data) {");
+			chk.AppendLine("  int codepage = -1, weight = 0;");
+			foreach (var pair in Langs)
+			{
+				var lang = pair.Key;
+				pair.Value.MakeCode(sb, lang, 0);
+				foreach (var langEnc in LangEncs[lang])
+				{
+					chk.AppendLine(string.Format("  TryEncoding(ref codepage, ref weight, {0}, data, check_{1});", 
+						langEnc, lang));
+				}
+			}
+			chk.AppendLine("  return codepage;");
+			chk.AppendLine("}");
+			sb.Append(chk);
+			File.WriteAllText("RussEnc2.cs", sb.ToString());
 		}
 
 		public void AfterProcess()

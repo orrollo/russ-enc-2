@@ -29,12 +29,12 @@ namespace RussEnc2
 			}
 		}
 
-		protected Dictionary<string,List<string>> LangEncs
+		protected Dictionary<string,List<int>> LangEncs
 		{
 			get
 			{
-				if (!Context.ContainsKey("langEncs")) Context["langEncs"] = new Dictionary<string, List<string>>();
-				return Context.Get<Dictionary<string, List<string>>>("langEncs");
+				if (!Context.ContainsKey("langEncs")) Context["langEncs"] = new Dictionary<string, List<int>>();
+				return Context.Get<Dictionary<string, List<int>>>("langEncs");
 			}
 		}
 
